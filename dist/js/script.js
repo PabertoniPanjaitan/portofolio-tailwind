@@ -52,3 +52,85 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 } else {
   darkToggle.checked = false;
 }
+
+// filter leaguage
+let currentLanguage = 'en';
+
+function toggleDarkMode(){
+  const htmlClasses = document.documentElement.classList;
+  if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    htmlClasses.add('dark');
+    localStorage.theme = 'dark';
+  } else {
+    htmlClasses.remove('dark');
+    localStorage.theme = 'light';
+  }
+}
+
+function toggleLanguage() {
+  const flagIcon = document.getElementById('flag-icon');
+  // if (currentLanguage === 'en') {
+  //   flagIcon.src = 'dist/img/league/indonesia.png';
+  //   flagIcon.alt = 'Bahasa Indonesia';
+  //   currentLanguage = 'id';
+  //   // window.location.href='/id'
+  // } else {
+    //   flagIcon.src = 'dist/img/league/united-kingdom.png';
+    //   flagIcon.alt = 'English';
+    //   currentLanguage = 'en';
+    //   // window.location.href='/en';
+    // }
+    
+    if (flagIcon.src.includes('united-kingdom.png')){
+      flagIcon.src = 'dist/img/league/indonesia.png';
+      currentLanguage = 'en';
+    }else {
+      flagIcon.src = 'dist/img/league/united-kingdom.png';
+      currentLanguage = 'id';
+  }
+}
+
+// siuu
+document.addEventListener('DOMContentLoaded', function() {
+  const languageButton = document.getElementById('language-button');
+  const flagIcon = document.getElementById('flag-icon');
+  const greeting = document.getElementById('greeting');
+  const description = document.getElementById('description');
+
+  const content = {
+    en: {
+      greeting: 'Hello, Welcome!',
+      description: 'This is an example of a multilingual site using Tailwind CSS.',
+      flag: 'dist/img/League/united-kingdom.png',
+      alt: 'English'
+    },
+    id: {
+      greeting: 'Halo, Selamat Datang!',
+      description: 'Ini adalah contoh situs multibahasa menggunakan Tailwind CSS.',
+      flag: 'dist/img/League/indonesia.png',
+      alt: 'Bahasa Indonesia'
+    }
+  };
+
+  let currentLanguage = 'en';
+
+  function toggleLanguage() {
+    currentLanguage = currentLanguage === 'en' ? 'id' : 'en';
+    updateContent();
+  }
+
+  function updateContent() {
+    greeting.textContent = content[currentLanguage].greeting;
+    description.textContent = content[currentLanguage].description;
+    flagIcon.src = content[currentLanguage].flag;
+    flagIcon.alt = content[currentLanguage].alt;
+  }
+
+  languageButton.addEventListener('click', toggleLanguage);
+
+  // Set default language content
+  updateContent();
+});
+
+
+

@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         primary: '#14b8a6',
         secondary: '#64748b',
+        gokil: '#fb923c',
         dark: '#0f172a',
       },
       screens: {
